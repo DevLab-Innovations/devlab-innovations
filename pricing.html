@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — Summa Ledger by DevLab Innovations</title>
+  <meta name="description" content="Summa Ledger is free to download. Upgrade to Premium for unlimited AI, voice commands, live GPS tracking, peer sharing, and more. 30-day free trial." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── Pricing page-specific styles ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto 64px;
+    }
+
+    .pricing-card {
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      position: relative;
+    }
+
+    .pricing-card--premium {
+      border-color: var(--primary);
+      background: var(--surface);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .pricing-card__badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .pricing-card__tier {
+      font-size: .8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .pricing-card--premium .pricing-card__tier { color: var(--primary); }
+
+    .pricing-card__price {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pricing-card__price sup {
+      font-size: 1.25rem;
+      font-weight: 700;
+      vertical-align: super;
+      letter-spacing: 0;
+    }
+
+    .pricing-card__period {
+      font-size: .875rem;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+    .pricing-card__annual {
+      display: inline-block;
+      font-size: .8rem;
+      color: var(--success);
+      font-weight: 600;
+      background: #D1FAE5;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
+    .pricing-card__desc {
+      font-size: .9rem;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .pricing-card__cta {
+      display: block;
+      text-align: center;
+      padding: 13px 24px;
+      border-radius: var(--radius-md);
+      font-size: .9375rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .pricing-card__cta:hover { transform: translateY(-1px); }
+
+    .pricing-card__cta--free {
+      background: var(--surface);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .pricing-card__cta--free:hover { background: var(--primary-bg); }
+
+    .pricing-card__cta--premium {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(124,58,237,.35);
+    }
+    .pricing-card__cta--premium:hover { box-shadow: 0 6px 20px rgba(124,58,237,.45); }
+
+    .pricing-card__trial {
+      text-align: center;
+      font-size: .8rem;
+      color: var(--text-tertiary);
+      margin-top: -20px;
+      margin-bottom: 28px;
+    }
+
+    .pricing-features { display: flex; flex-direction: column; gap: 12px; }
+
+    .pricing-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .9rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .pricing-feature__check {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .pricing-feature__check--yes { background: var(--primary-bg); color: var(--primary); font-weight: 900; }
+    .pricing-feature__check--limited { background: var(--secondary-bg); color: var(--secondary-dark); font-weight: 900; }
+    .pricing-feature__check--no { background: var(--surfaceVariant, #F5F5F4); color: var(--text-tertiary); }
+
+    .pricing-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 8px 0;
+    }
+
+    .pricing-section-label {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+    }
+
+    /* Comparison table */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .compare-table th {
+      padding: 16px 20px;
+      text-align: left;
+      font-size: .8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      background: var(--background);
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-table th:not(:first-child) { text-align: center; }
+    .compare-table th.th--premium { color: var(--primary); background: var(--primary-bg); }
+
+    .compare-table td {
+      padding: 13px 20px;
+      font-size: .9rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .compare-table td:not(:first-child) { text-align: center; }
+    .compare-table tr:last-child td { border-bottom: none; }
+
+    .compare-table tr:nth-child(even) td { background: var(--background); }
+
+    .compare-table .check-yes    { color: var(--primary); font-size: 1.1rem; font-weight: 700; }
+    .compare-table .check-no     { color: var(--border-dark); font-size: 1.1rem; }
+    .compare-table .check-limit  { font-size: .8rem; font-weight: 600; color: var(--secondary-dark); }
+
+    .compare-table .row-group td {
+      background: var(--primary-bg) !important;
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--primary);
+      padding: 8px 20px;
+    }
+
+    /* Add-on card */
+    .addon-card {
+      max-width: 560px;
+      margin: 48px auto 0;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 24px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .addon-card__icon {
+      width: 44px; height: 44px;
+      background: var(--secondary-bg);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .addon-card__body h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .addon-card__body p  { font-size: .875rem; color: var(--text-secondary); line-height: 1.55; }
+    .addon-card__price   { margin-left: auto; flex-shrink: 0; font-weight: 800; color: var(--primary); font-size: 1rem; }
+
+    @media (max-width: 700px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+      .compare-table { font-size: .8rem; }
+      .compare-table th, .compare-table td { padding: 10px 12px; }
+      .addon-card { flex-wrap: wrap; }
+      .addon-card__price { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<header class="nav" role="banner">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__brand" aria-label="DevLab Innovations home">
+      <div class="nav__brand-icon" aria-hidden="true">DL</div>
+      <span>DevLab Innovations</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary navigation">
+      <a href="index.html"    class="nav__link">Home</a>
+      <a href="features.html" class="nav__link">Features</a>
+      <a href="pricing.html"  class="nav__link">Pricing</a>
+      <a href="about.html"    class="nav__link">About</a>
+    </nav>
+
+    <a href="https://apps.apple.com/app/summa-ledger" target="_blank" rel="noopener" class="btn btn-primary nav__cta">
+      &#8599; Download Free
+    </a>
+
+    <button id="hamburger" class="nav__hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav id="mobile-nav" class="nav__mobile" aria-label="Mobile navigation">
+    <a href="index.html"    class="nav__link">Home</a>
+    <a href="features.html" class="nav__link">Features</a>
+    <a href="pricing.html"  class="nav__link">Pricing</a>
+    <a href="about.html"    class="nav__link">About</a>
+    <a href="https://apps.apple.com/app/summa-ledger" target="_blank" rel="noopener" class="btn btn-primary">Download Free</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ── Page Hero ── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="eyebrow">Pricing</div>
+      <h1 class="section-title">Start free. Upgrade when you're ready.</h1>
+      <p class="section-subtitle" style="margin: 0 auto;">Core expense and mileage tracking are always free. Upgrade to Premium for unlimited AI, live GPS, peer sharing, and advanced financial tools.</p>
+    </div>
+  </section>
+
+  <!-- ── Pricing Cards ── -->
+  <section class="section section--alt">
+    <div class="container">
+
+      <div class="pricing-grid">
+
+        <!-- Free -->
+        <div class="pricing-card">
+          <div class="pricing-card__tier">Free</div>
+          <div class="pricing-card__price"><sup>$</sup>0</div>
+          <div class="pricing-card__period">forever</div>
+          <p class="pricing-card__desc">Everything you need to start tracking expenses, mileage, and receipts — no credit card, no account required.</p>
+          <a href="https://apps.apple.com/app/summa-ledger" target="_blank" rel="noopener" class="pricing-card__cta pricing-card__cta--free">
+            &#8599; Download Free
+          </a>
+          <div class="pricing-features">
+            <div class="pricing-section-label">Included</div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Expense &amp; receipt tracking
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Mileage logging (manual entry)
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Basic receipt OCR
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Excel &amp; PDF export
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              iCloud sync across your devices
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Face ID / passcode lock
+            </div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-section-label">Limited</div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--limited">~</div>
+              3 AI natural language queries / month
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--no">&#10005;</div>
+              <span style="color:var(--text-tertiary)">No voice commands</span>
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--no">&#10005;</div>
+              <span style="color:var(--text-tertiary)">No live GPS trip tracking</span>
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--no">&#10005;</div>
+              <span style="color:var(--text-tertiary)">No peer sharing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium -->
+        <div class="pricing-card pricing-card--premium">
+          <div class="pricing-card__badge">Most Popular</div>
+          <div class="pricing-card__tier">Premium</div>
+          <div class="pricing-card__price"><sup>$</sup>14<span style="font-size:1.5rem">.99</span></div>
+          <div class="pricing-card__period">per month</div>
+          <span class="pricing-card__annual">$149.99/year — save 17%</span>
+          <p class="pricing-card__desc">Everything in Free, plus the full AI suite, live GPS tracking, peer collaboration, and advanced financial tools.</p>
+          <a href="https://apps.apple.com/app/summa-ledger" target="_blank" rel="noopener" class="pricing-card__cta pricing-card__cta--premium">
+            Start 30-Day Free Trial
+          </a>
+          <div class="pricing-card__trial">No credit card required &middot; Cancel anytime</div>
+          <div class="pricing-features">
+            <div class="pricing-section-label">Everything in Free, plus</div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              <strong>Unlimited AI natural language queries</strong>
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Voice commands — log expenses hands-free
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Enhanced on-device receipt AI (DistilBERT)
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Smart ML auto-categorization
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Live GPS trip tracking
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Bill tracking with reminders
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Quarterly tax estimates
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Recurring expense detection
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Peer sharing (Viewer &amp; Editor roles)
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Financial projections &amp; savings goals
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Document wallet (receipts, PDFs)
+            </div>
+            <div class="pricing-feature">
+              <div class="pricing-feature__check pricing-feature__check--yes">&#10003;</div>
+              Up to 5 accounts
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Add-on -->
+      <div class="addon-card">
+        <div class="addon-card__icon" aria-hidden="true">&#9729;</div>
+        <div class="addon-card__body">
+          <h4>Peer Sharing Add-on</h4>
+          <p>Need to share with your accountant or a collaborator but not ready for full Premium? Add peer sharing to your Free account — give Viewer or Editor access to anyone via iCloud.</p>
+        </div>
+        <div class="addon-card__price">$4.99<span style="font-size:.75rem; font-weight:500; color:var(--text-tertiary)">/mo</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Full Comparison Table ── -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <div class="eyebrow">Full Comparison</div>
+        <h2 class="section-title">Everything side by side</h2>
+      </div>
+
+      <div style="overflow-x:auto; margin-top: 40px;">
+        <table class="compare-table" aria-label="Feature comparison between Free and Premium tiers">
+          <thead>
+            <tr>
+              <th style="width:55%">Feature</th>
+              <th>Free</th>
+              <th class="th--premium">Premium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-group"><td colspan="3">Core Tracking</td></tr>
+            <tr><td>Expense logging &amp; categories</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Receipt capture &amp; OCR</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Mileage tracking (manual)</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Live GPS trip tracking</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Income &amp; bill tracking</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Split transactions</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+
+            <tr class="row-group"><td colspan="3">AI &amp; Intelligence</td></tr>
+            <tr><td>Basic receipt OCR</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Enhanced receipt AI (DistilBERT NER)</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Voice commands</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Natural language queries</td><td><span class="check-limit">3 / month</span></td><td><span class="check-yes">Unlimited</span></td></tr>
+            <tr><td>Smart ML auto-categorization</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Recurring expense detection</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+
+            <tr class="row-group"><td colspan="3">Reports &amp; Finance</td></tr>
+            <tr><td>Excel &amp; PDF export</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Custom reports &amp; filters</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Quarterly tax estimates</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Financial projections (30/60/90-day)</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Savings goals</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Cash flow dashboard</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+
+            <tr class="row-group"><td colspan="3">Sharing &amp; Collaboration</td></tr>
+            <tr><td>iCloud sync (your devices)</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Accountant read-only sharing</td><td><span class="check-limit">Add-on $4.99/mo</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Peer collaboration (Viewer / Editor)</td><td><span class="check-limit">Add-on $4.99/mo</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+
+            <tr class="row-group"><td colspan="3">Security &amp; Storage</td></tr>
+            <tr><td>Face ID / passcode lock</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Encrypted local storage</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Document wallet (PDFs, images)</td><td><span class="check-no">&#10005;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+            <tr><td>Number of accounts</td><td><span class="check-limit">1</span></td><td><span class="check-yes">Up to 5</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="cta-banner">
+        <h2 class="cta-banner__title">Try Premium free for 30 days.</h2>
+        <p class="cta-banner__sub">No credit card required. Full access to every feature. Reverts to the generous free tier if you don't upgrade.</p>
+        <div class="cta-banner__actions">
+          <a href="https://apps.apple.com/app/summa-ledger" target="_blank" rel="noopener" class="btn btn-lg" style="background:#fff; color:var(--primary); font-weight:700;">
+            &#8599; Start Free Trial on the App Store
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ── -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand">
+          <div class="footer__brand-icon" aria-hidden="true">DL</div>
+          <span class="footer__brand-name">DevLab Innovations</span>
+        </div>
+        <p class="footer__desc">Building software that respects your privacy and keeps you in control of your data.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="https://apps.apple.com/app/summa-ledger" target="_blank" rel="noopener">Download</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="mailto:info@devlabinnovations.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; 2025 DevLab Innovations. All rights reserved.</span>
+      <span>Summa Ledger v0.5.1 &mdash; Available on the App Store</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
