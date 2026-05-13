@@ -323,120 +323,17 @@ ul { list-style: none; }
   align-items: center;
 }
 
-.app-mockup {
-  width: 280px;
-  height: 520px;
-  background: linear-gradient(160deg, var(--primary) 0%, var(--primary-dark) 100%);
-  border-radius: 40px;
-  box-shadow: var(--shadow-lg), 0 0 0 10px rgba(124,58,237,.1);
+.app-screenshot-wrap {
   position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  filter: drop-shadow(0 24px 48px rgba(124,58,237,.18)) drop-shadow(0 8px 16px rgba(0,0,0,.12));
 }
 
-.app-mockup::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 100px; height: 28px;
-  background: rgba(0,0,0,.5);
-  border-radius: 0 0 18px 18px;
-}
-
-.mockup-screen {
-  flex: 1;
-  margin: 40px 16px 16px;
-  background: rgba(255,255,255,.08);
+.app-screenshot {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
   border-radius: 20px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.mockup-header {
-  font-size: .75rem;
-  font-weight: 600;
-  color: rgba(255,255,255,.6);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-}
-
-.mockup-amount {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -.02em;
-}
-
-.mockup-label {
-  font-size: .75rem;
-  color: rgba(255,255,255,.5);
-  margin-top: -8px;
-}
-
-.mockup-divider {
-  height: 1px;
-  background: rgba(255,255,255,.1);
-}
-
-.mockup-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.mockup-row-icon {
-  width: 28px; height: 28px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.15);
-}
-
-.mockup-row-text { flex: 1; margin-left: 10px; }
-.mockup-row-name { font-size: .7rem; color: rgba(255,255,255,.85); font-weight: 500; }
-.mockup-row-cat  { font-size: .65rem; color: rgba(255,255,255,.4); }
-.mockup-row-amount { font-size: .7rem; font-weight: 600; color: #fff; }
-
-.mockup-chart {
-  height: 60px;
-  background: rgba(255,255,255,.06);
-  border-radius: 10px;
-  margin-top: auto;
-  display: flex;
-  align-items: flex-end;
-  gap: 4px;
-  padding: 8px;
-  overflow: hidden;
-}
-
-.mockup-bar {
-  flex: 1;
-  background: rgba(255,255,255,.3);
-  border-radius: 3px 3px 0 0;
-}
-
-.mockup-floating {
-  position: absolute;
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
-  box-shadow: var(--shadow-md);
-  font-size: .75rem;
-}
-
-.mockup-floating--1 {
-  top: 80px;
-  right: -40px;
-  color: var(--success);
-  font-weight: 700;
-}
-
-.mockup-floating--2 {
-  bottom: 100px;
-  left: -40px;
-  color: var(--text-secondary);
+  display: block;
 }
 
 /* ── Features grid ── */
