@@ -636,26 +636,6 @@ ul { list-style: none; }
 .value-card h4    { font-size: .9375rem; font-weight: 700; margin-bottom: 6px; }
 .value-card p     { font-size: .875rem; color: var(--text-secondary); line-height: 1.55; }
 
-.contact-card {
-  background: var(--primary-bg);
-  border: 1px solid rgba(124,58,237,.15);
-  border-radius: var(--radius-lg);
-  padding: 36px;
-  margin-top: 48px;
-}
-
-.contact-card h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 8px; }
-.contact-card p  { color: var(--text-secondary); margin-bottom: 20px; }
-
-.contact-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--primary);
-  font-weight: 600;
-  font-size: .9375rem;
-}
-.contact-link:hover { text-decoration: underline; }
 
 /* ── Footer ── */
 .footer {
