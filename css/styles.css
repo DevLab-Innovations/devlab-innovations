@@ -439,6 +439,72 @@ ul { list-style: none; }
 .cta-banner__sub   { font-size: 1.0625rem; opacity: .85; margin-bottom: 32px; }
 .cta-banner__actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
+/* ── Differentiator grid ── */
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.diff-card {
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  border-top: 4px solid transparent;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.diff-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.diff-card--primary { background: var(--primary-bg);  border-color: var(--primary); }
+.diff-card--orange  { background: var(--secondary-bg); border-color: var(--secondary); }
+.diff-card--teal    { background: var(--teal-light);   border-color: var(--teal); }
+.diff-card--dark    { background: var(--surface); border-color: var(--text); border: 1px solid var(--border); border-top: 4px solid var(--text); }
+
+.diff-card__icon {
+  font-size: 1.75rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.diff-card h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.diff-card p {
+  font-size: .9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.diff-card p em {
+  font-style: italic;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.ai-footnote {
+  margin-top: 40px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--primary-bg);
+  border: 1px solid rgba(124,58,237,.15);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  font-size: .875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.ai-footnote span { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
 /* ── Stats row ── */
 .stats-row {
   display: grid;
@@ -588,6 +654,7 @@ ul { list-style: none; }
   .hero__visual       { display: none; }
   .features-grid      { grid-template-columns: 1fr; }
   .features-full      { grid-template-columns: 1fr; }
+  .diff-grid          { grid-template-columns: 1fr; }
   .about-grid         { grid-template-columns: 1fr; }
   .about-visual       { display: none; }
   .stats-row          { grid-template-columns: 1fr; }
