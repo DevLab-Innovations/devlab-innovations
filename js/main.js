@@ -20,9 +20,9 @@
 
 // Mark current page link active
 (function () {
-  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const path = window.location.pathname.replace(/\/$/, '') || '/';
   document.querySelectorAll('.nav__link').forEach(function (link) {
-    const href = link.getAttribute('href').split('/').pop();
+    const href = link.getAttribute('href').replace(/\/$/, '') || '/';
     if (href === path) link.classList.add('active');
   });
 })();
