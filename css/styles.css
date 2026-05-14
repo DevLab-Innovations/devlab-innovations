@@ -230,7 +230,7 @@ ul { list-style: none; }
 
 /* ── Hero ── */
 .hero {
-  padding: 80px 0 96px;
+  padding: 80px 0 48px;
   overflow: hidden;
   position: relative;
 }
